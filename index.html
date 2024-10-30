@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Octopus Maximus</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00FF00;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+        
+    .matrix-text {
+      color: #00FF00;
+      font-weight: bold;
+      font-size: 24px;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      position: relative;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.75);
+    }
+
+    .ascii-art {
+      font-size: 18px; 
+      line-height: 1;
+      white-space: pre;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);  
+    }
+  </style>
+</head>
+<body>
+  <div class="matrix"></div>
+
+  <div class="container"> 
+    <h1>OCTOPUS MAXIMUS</h1>
+    
+    <div class="ascii-art">
+       ___       ___       ___       ___       ___       ___   
+     .'   '.   .'   '.   .'   '.   .'   '.   .'   '.   .'   '. 
+    /       \ /       \ /       \ /       \ /       \ /       \
+   |         |         |         |         |         |         |
+    \       / \       / \       / \       / \       / \       / 
+     '.___.'   '.___.'   '.___.'   '.___.'   '.___.'   '.___.
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Latest Sightings</h2>
+      <ul class="matrix-text">
+        <li>> Mega Kraken spotted off coast of Atlantis!</li>
+        <li>> Giant Squid migration patterns revealed</li>
+        <li>> New bioluminescent Octopus species found</li>
+      </ul>
+    </div>
+
+    <div class="section">  
+      <h2 class="section-title">Explore The Abyss</h2>
+      <p class="matrix-text">
+        > Dive into the unknown depths of the ocean<br>
+        > Uncover hidden treasures and lost civilizations
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Myths & Legends</h2> 
+      <ul class="matrix-text">
+        <li>> Ancient tales of cephalopod gods</li>
+        <li>> Epic sagas of tentacled beasts</li>  
+        <li>> Rumors of a city of squids</li>
+      </ul>  
+    </div>
+
+    <div class="ascii-art">
+  >------>------>------>------>------>------>------>------>------>------>------>
+    </div>
+
+    <p class="matrix-text">
+      © 2024 OctopusMaximus.com<br>
+      Website best viewed submerged 20,000 leagues under the sea. 
+    </p>
+  </div>
+
+  <script>
+    const matrix = document.querySelector('.matrix');
+    const matrixContext = matrix.getContext('2d');
+    
+    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+    matrix.width = window.innerWidth;
+    matrix.height = window.innerHeight;
+    
+    const fontSize = 16;
+    const columns = matrix.width / fontSize;
+    const drops = [];
+    
+    for (let x = 0; x < columns; x++) {
+      drops[x] = 1;
+    }
+    
+    function matrixEffect() {
+      matrixContext.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      matrixContext.fillRect(0, 0, matrix.width, matrix.height);
+      
+      matrixContext.fillStyle = '#00FF00';
+      matrixContext.font = `${fontSize}px monospace`;
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        matrixContext.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > matrix.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+    }
+    
+    setInterval(matrixEffect, 60); 
+  </script>
+</body>
+</html>
